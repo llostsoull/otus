@@ -1,0 +1,1 @@
+docker run -d -p 8000:8000 -t otus-dz2-docker-health-0.0.1
