@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-kubernetes-dz3
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: health-kubernetes-dz3
+  template:
+    metadata:
+      labels:
+        app: health-kubernetes-dz3
+    spec:
+      containers:
+        - name: health-kubernetes-dz3
+          image: itzz/otus-dz2-health:latest
+          ports:
+            - name: http
+              containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 10
+            initialDelaySeconds: 10
