@@ -1,0 +1,48 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migration-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: flyway
+          image: flyway/flyway:10.7.1
+          args:
+            - info
+            - repair
+            - migrate
+            - info
+          env:
+            - name: FLYWAY_URL
+              value: jdbc:postgresql://dev-pg-postgresql:5432/postgres
+            - name: FLYWAY_USER
+              valueFrom:
+                secretKeyRef:
+                  name: user-service-secret
+                  key: pgusername
+            - name: FLYWAY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: user-service-secret
+                  key: pgpassword
+            - name: FLYWAY_PLACEHOLDER_REPLACEMENT
+              value: "true"
+            - name: FLYWAY_PLACEHOLDERS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: user-service-secret
+                  key: username
+            - name: FLYWAY_PLACEHOLDERS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: user-service-secret
+                  key: password
+          volumeMounts:
+            - mountPath: /flyway/sql
+              name: sql
+      volumes:
+        - name: sql
+          configMap:
+            name: postgres-configmap
+      restartPolicy: Never

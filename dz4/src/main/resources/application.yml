@@ -1,0 +1,30 @@
+server:
+  port: 8000
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+    root: INFO
+    homework.arch: DEBUG
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATASOURCE_URL:jdbc:postgresql://127.0.0.1:5432/userapp?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;connectionCollation=utf8_general_ci&amp;characterSetResults=UTF-8}
+    username: ${DATASOURCE_USERNAME:userapp}
+    password: ${DATASOURCE_PASSWORD:userapppass}
+  jpa:
+    properties:
+      hibernate:
+        jdbc.lob.non_contextual_creation: true
+        jdbc.batch_size: 20
+        order_inserts: true
+        order_updates: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: false
+        use_sql_comments: true
+        format_sql: true
