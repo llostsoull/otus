@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-dz5
+spec:
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: user-service-dz5
+  template:
+    metadata:
+      labels:
+        app: user-service-dz5
+    spec:
+      containers:   
+        - name: user-service-dz5
+          image: itzz/user-service:0.0.2
+          imagePullPolicy: IfNotPresent
+          envFrom:
+             - configMapRef:
+                  name: user-service-config
+          env:        
+            - name: DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: user-service-secret
+                  key: username
+            - name: DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: user-service-secret
+                  key: password
+          ports:
+            - name: http
+              containerPort: 8000
+
