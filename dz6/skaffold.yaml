@@ -1,0 +1,24 @@
+apiVersion: skaffold/v4beta10
+kind: Config
+build:
+  artifacts:
+  - image: auth
+    context: auth
+  - image: app
+    context: app
+  tagPolicy:
+    sha256: {}
+deploy:
+  helm:
+    releases:
+    - name: auth
+      chartPath: auth/auth-chart
+      skipBuildDependencies: true
+      setValueTemplates:
+        image: auth
+    - name: app
+      chartPath: app/app-chart
+      skipBuildDependencies: true
+      setValueTemplates:
+        image: app       
+
