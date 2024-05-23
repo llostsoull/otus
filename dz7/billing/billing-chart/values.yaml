@@ -1,0 +1,19 @@
+replicaCount: 1
+
+fullnameOverride: "billing"
+
+image: "billing:0.2.14"
+
+service:
+  type: ClusterIP
+  port: 9000
+
+postgresql:
+  enabled: true
+  postgresqlUsername: billinguser
+  postgresqlPassword: billingpasswd
+  postgresqlDatabase: billingdb
+  persistence:
+    size: 0.1Gi
+  service:
+    port: "5432"
