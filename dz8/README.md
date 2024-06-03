@@ -66,54 +66,54 @@ newman
 order
 
 → регистрация
-  POST http://arch.homework/register [200 OK, 147B, 627ms]
+  POST http://arch.homework/register [200 OK, 147B, 160ms]
 
 → логин
-  POST http://arch.homework/login [200 OK, 236B, 147ms]
+  POST http://arch.homework/login [200 OK, 236B, 22ms]
 
 → Список доставщиков
-  GET http://arch.homework/delivery/person [200 OK, 676B, 471ms]
+  GET http://arch.homework/delivery/person [200 OK, 676B, 24ms]
 
 → пополнить счет 5000
-  POST http://arch.homework/billing/change [200 OK, 237B, 362ms]
+  POST http://arch.homework/billing/change [200 OK, 237B, 55ms]
   √  test amount 5000 OK
 
 → Посмотреть деньги 1
-  GET http://arch.homework/billing/current [200 OK, 156B, 23ms]
+  GET http://arch.homework/billing/current [200 OK, 156B, 57ms]
   √  test balance 5000.0
 
 → Пополнить склад
-  POST http://arch.homework/storage/change [200 OK, 1kB, 86ms]
+  POST http://arch.homework/storage/change [200 OK, 1kB, 70ms]
 
 → Склад актуал
-  GET http://arch.homework/storage [200 OK, 707B, 41ms]
+  GET http://arch.homework/storage [200 OK, 708B, 17ms]
 
 → Резерв доставщик
-  POST http://arch.homework/delivery/reserve [200 OK, 260B, 32ms]
+  POST http://arch.homework/delivery/reserve [200 OK, 260B, 16ms]
 
-→ Заказ на 100 1
-  POST http://arch.homework/order [200 OK, 1.63kB, 909ms]
+→ Заказ на 2000 1
+  POST http://arch.homework/order [200 OK, 1.63kB, 524ms]
 
-→ Заказ на 100 2
-  POST http://arch.homework/order [200 OK, 1.63kB, 332ms]
+→ Заказ на 500 2
+  POST http://arch.homework/order [200 OK, 1.63kB, 275ms]
 
-→ Заказ на 100 3
-  POST http://arch.homework/order [200 OK, 1.63kB, 418ms]
+→ Заказ на 500 3
+  POST http://arch.homework/order [200 OK, 1.63kB, 285ms]
 
-→ Заказ на 100 4
-  POST http://arch.homework/order [200 OK, 470B, 823ms]
+→ Заказ на 500 4
+  POST http://arch.homework/order [200 OK, 470B, 278ms]
   √  Нет доставщиков OK
 
 → Посмотреть нотификации 1
-  GET http://arch.homework/notification [200 OK, 552B, 217ms]
+  GET http://arch.homework/notification [200 OK, 552B, 22ms]
   √  test order Processing
 
 → Список заказов
-  GET http://arch.homework/order [200 OK, 1.28kB, 270ms]
+  GET http://arch.homework/order [200 OK, 1.28kB, 152ms]
   √  test order Failed
 
 → Посмотреть деньги 2
-  GET http://arch.homework/billing/current [200 OK, 156B, 32ms]
+  GET http://arch.homework/billing/current [200 OK, 156B, 25ms]
   √  test balance 2000.0
 
 ┌─────────────────────────┬────────────────────┬────────────────────┐
@@ -129,11 +129,11 @@ order
 ├─────────────────────────┼────────────────────┼────────────────────┤
 │              assertions │                  6 │                  0 │
 ├─────────────────────────┴────────────────────┴────────────────────┤
-│ total run duration: 7.2s                                          │
+│ total run duration: 4.3s                                          │
 ├───────────────────────────────────────────────────────────────────┤
-│ total data received: 8.69kB (approx)                              │
+│ total data received: 8.7kB (approx)                               │
 ├───────────────────────────────────────────────────────────────────┤
-│ average response time: 319ms [min: 23ms, max: 909ms, s.d.: 277ms] │
+│ average response time: 132ms [min: 16ms, max: 524ms, s.d.: 143ms] │
 └───────────────────────────────────────────────────────────────────┘
 
 ```

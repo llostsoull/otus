@@ -272,13 +272,13 @@
 			"response": []
 		},
 		{
-			"name": "Заказ на 100 1",
+			"name": "Заказ на 2000 1",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"amount\": 2000,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 17:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
+					"raw": "{\r\n    \"amount\": 2000,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -298,13 +298,13 @@
 			"response": []
 		},
 		{
-			"name": "Заказ на 100 2",
+			"name": "Заказ на 500 2",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 17:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
+					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -324,13 +324,13 @@
 			"response": []
 		},
 		{
-			"name": "Заказ на 100 3",
+			"name": "Заказ на 500 3",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 17:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
+					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -350,7 +350,7 @@
 			"response": []
 		},
 		{
-			"name": "Заказ на 100 4",
+			"name": "Заказ на 500 4",
 			"event": [
 				{
 					"listen": "test",
@@ -372,7 +372,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 17:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
+					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
