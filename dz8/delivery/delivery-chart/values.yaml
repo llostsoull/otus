@@ -1,0 +1,19 @@
+replicaCount: 1
+
+fullnameOverride: "delivery"
+
+image: "delivery:0.2.14"
+
+service:
+  type: ClusterIP
+  port: 9000
+
+postgresql:
+  enabled: true
+  postgresqlUsername: deliveryuser
+  postgresqlPassword: deliverypasswd
+  postgresqlDatabase: deliverydb
+  persistence:
+    size: 0.1Gi
+  service:
+    port: "5432"

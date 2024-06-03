@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "notification-chart.fullname" . }}
+  labels:
+    {{- include "notification-chart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 80
+      name: web
+  selector:
+    {{- include "notification-chart.selectorLabels" . | nindent 4 }}

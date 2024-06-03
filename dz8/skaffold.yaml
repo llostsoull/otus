@@ -1,0 +1,51 @@
+apiVersion: skaffold/v4beta10
+kind: Config
+build:
+  artifacts:
+  - image: auth
+    context: auth
+  - image: notification
+    context: notification
+  - image: billing
+    context: billing
+  - image: order
+    context: order
+  - image: delivery
+    context: delivery
+  - image: storage
+    context: storage
+  tagPolicy:
+    sha256: {}
+deploy:
+  helm:
+    releases:
+    - name: auth
+      chartPath: auth/auth-chart
+      skipBuildDependencies: true
+      setValueTemplates:
+        image: auth
+    - name: notification
+      chartPath: notification/notification-chart
+      skipBuildDependencies: true
+      setValueTemplates:
+        image: notification
+    - name: billing
+      chartPath: billing/billing-chart
+      skipBuildDependencies: true
+      setValueTemplates:
+        image: billing
+    - name: order
+      chartPath: order/order-chart
+      skipBuildDependencies: true
+      setValueTemplates:
+        image: order
+    - name: delivery
+      chartPath: delivery/delivery-chart
+      skipBuildDependencies: true
+      setValueTemplates:
+        image: delivery
+    - name: storage
+      chartPath: storage/storage-chart
+      skipBuildDependencies: true
+      setValueTemplates:
+        image: storage

@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta2
+kind: Config
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+  - image: billing
+    context: .
+deploy:
+  helm:
+    releases:
+    - name: billing
+      chartPath: billing-chart
+      skipBuildDependencies: true
+      values:
+        image: billing

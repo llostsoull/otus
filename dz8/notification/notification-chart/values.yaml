@@ -1,0 +1,19 @@
+replicaCount: 1
+
+fullnameOverride: "notification"
+
+image: "notification:0.2.14"
+
+service:
+  type: ClusterIP
+  port: 9000
+
+postgresql:
+  enabled: true
+  postgresqlUsername: notificationuser
+  postgresqlPassword: notificationpasswd
+  postgresqlDatabase: notificationdb
+  persistence:
+    size: 0.1Gi
+  service:
+    port: "5432"

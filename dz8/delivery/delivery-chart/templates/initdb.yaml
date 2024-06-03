@@ -1,0 +1,73 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}"
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+     # This is what defines this resource as a hook. Without this line, the
+     # job is considered part of the release.
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      name: "{{ .Release.Name }}"
+      labels:
+        app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+        app.kubernetes.io/instance: {{ .Release.Name | quote }}
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: check-db-ready
+          image: postgres:latest
+          env:
+            - name: POSTGRES_HOST
+              value: {{ include "postgresql.fullname" . | quote }}
+            - name: POSTGRES_PORT
+              value: {{ .Values.postgresql.service.port | quote }}
+          command:
+            - sh
+            - "-c"
+            - |
+              until pg_isready -h $POSTGRES_HOST  -p  $POSTGRES_PORT;
+              do echo waiting for database; sleep 2; done;
+      containers:
+      - name: post-install-job
+        env:
+          - name: DATABASE_URI
+            value: {{ printf "postgresql://%s:%s@%s:%s/%s" .Values.postgresql.postgresqlUsername .Values.postgresql.postgresqlPassword (include "postgresql.fullname" .) .Values.postgresql.service.port .Values.postgresql.postgresqlDatabase  | quote }}
+        image: postgres:latest
+        command:
+          - sh
+          - "-c"
+          - |
+            psql $DATABASE_URI <<'EOF'
+              drop table if exists delivery_person;
+              create table delivery_person (
+                  id SERIAL primary key,
+                  name varchar,
+                  phone varchar,
+                  created timestamptz not null default now()
+              );
+              insert into delivery_person (name, phone) values ('Иванов Иван Иванович', '+7(901)123-45-67');
+              insert into delivery_person (name, phone) values ('Петров Иван Иванович', '+7(901)321-45-67');
+              insert into delivery_person (name, phone) values ('Сидоров Игорь Иванович', '+7(901)321-54-67');
+              drop table if exists reserve_delivery_person;
+              create table reserve_delivery_person (
+                  id SERIAL primary key,
+                  key_delivery_person integer not null,
+                  datetime_from timestamptz not null,
+                  datetime_to timestamptz not null,
+                  status varchar,
+                  CONSTRAINT fk_reserve_delivery_person FOREIGN KEY (key_delivery_person) 
+                  REFERENCES delivery_person (id) ON DELETE CASCADE ON UPDATE CASCADE
+              );              
+            EOF
+
+  backoffLimit: 0
