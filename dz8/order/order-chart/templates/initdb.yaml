@@ -48,6 +48,7 @@ spec:
           - "-c"
           - |
             psql $DATABASE_URI <<'EOF'
+              drop table if exists order_items;
               drop table if exists user_order;
               create table user_order (
                   id SERIAL PRIMARY KEY,
@@ -56,9 +57,9 @@ spec:
                   status varchar default 'Pending',
                   amount integer,
                   address varchar,
-                  dt_delivery timestamptz not null
+                  dt_delivery timestamptz not null,
+                  idempotency_key varchar
               );
-              drop table if exists order_items;
               create table order_items (
                   id SERIAL primary key,
                   key_order integer not null,

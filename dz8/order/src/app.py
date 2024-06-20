@@ -32,17 +32,24 @@ def getOrders():
 def createOrder():
     if not 'X-UserId' in request.headers:
         return "Not authenticated"
+    if not 'Idempotency-Key' in request.headers:
+        return "Not Idempotency-Key"
     userId = request.headers['X-UserId']
+    idempotencyKey = request.headers['Idempotency-Key']
     request_data = request.get_json()
-    return create_order(request_data, userId)
+    return create_order(request_data, userId, idempotencyKey)
 
 
 # ******************* SAGA ********************************
-def create_order(order_data, user_id):
+def create_order(order_data, user_id, idempotency_key):
     order_id = 0
+    order_ = _check_order_in_database(idempotency_key)
+    if order_ is not None:
+        return order_
+
     try:
         # Шаг 1: Создание заказа
-        order_entity = _create_order_in_database(order_data, user_id)
+        order_entity = _create_order_in_database(order_data, user_id, idempotency_key)
         order_id = int(order_entity["id"])
 
         # Шаг 2: Резерв на складе
@@ -81,7 +88,19 @@ def _update_status_order_in_database(newState, orderId):
             """.format(newState, orderId))
     return "OK";
 
-def _create_order_in_database(order_data, userId):
+def _check_order_in_database(idempotency_key):
+    rv = []
+    with engine.connect() as connection:
+        result = connection.execute(
+            "select * from user_order "
+            "where idempotency_key='{}' order by created desc".format(idempotency_key)).first() 
+        if result is None :
+            return None
+
+        return Response(json.dumps(dict(result.items()), ensure_ascii=False, indent=4, sort_keys=True, default=str), mimetype='application/json') 
+
+
+def _create_order_in_database(order_data, userId, idempotency_key):
     amount = order_data['amount']
     items = order_data['items']
     dt_delivery = order_data['dt_delivery']
@@ -90,8 +109,8 @@ def _create_order_in_database(order_data, userId):
     with engine.connect() as connection:
         transaction = connection.begin()
         result = connection.execute(
-            "insert into user_order (user_id, amount, dt_delivery, address)"
-            "values ({}, {}, '{}', '{}') returning *;".format(userId, amount, dt_delivery, address)).first()
+            "insert into user_order (user_id, amount, dt_delivery, address, idempotency_key)"
+            "values ({}, {}, '{}', '{}', '{}') returning *;".format(userId, amount, dt_delivery, address, idempotency_key)).first()
         orderId = result["id"];
         data = json.loads(json.dumps((dict(result.items())), ensure_ascii=False, indent=4, sort_keys=True, default=str))
         data["items"] = [];

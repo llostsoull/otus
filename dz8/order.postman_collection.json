@@ -275,10 +275,47 @@
 			"name": "Заказ на 2000 1",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Idempotency-Key",
+						"value": "8e03978e-40d5-43e8-bc93-6894a57f9324",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"amount\": 2000,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
+					"raw": "{\r\n    \"amount\": 2000,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-21 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/order",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Заказ на 2000 1 повтор",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Idempotency-Key",
+						"value": "8e03978e-40d5-43e8-bc93-6894a57f9324"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\": 2000,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-21 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -301,10 +338,16 @@
 			"name": "Заказ на 500 2",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Idempotency-Key",
+						"value": "8e03978e-40d5-43e8-bc93-6894a57f9325",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
+					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-21 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -327,10 +370,16 @@
 			"name": "Заказ на 500 3",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Idempotency-Key",
+						"value": "8e03978e-40d5-43e8-bc93-6894a57f9326",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
+					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-21 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -369,10 +418,16 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Idempotency-Key",
+						"value": "8e03978e-40d5-43e8-bc93-6894a57f9327",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-03 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
+					"raw": "{\r\n    \"amount\": 500,\r\n    \"items\": [\r\n        {\r\n            \"key_item\": 1,\r\n            \"qty\": 5\r\n        },{\r\n            \"key_item\": 2,\r\n            \"qty\": 5\r\n        }\r\n    ],\r\n     \"dt_delivery\": \"2024-06-21 20:45:07.996637+00\",\r\n     \"address\": \"г. Москва, ул. Первая 1-2-1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
